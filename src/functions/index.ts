@@ -431,7 +431,7 @@ export class AuctionService {
                     content: this.auctionConfig.mail_sold_content,
                     currencies: "",
                     items: "",
-                    gold: auction.bidPrice,
+                    gold: (auction.bidPrice - (auction.bidPrice * this.auctionConfig.deduction_fee)),
                 }
             })
         }
@@ -496,7 +496,7 @@ export class AuctionService {
                 content: this.auctionConfig.mail_sold_content,
                 currencies: "",
                 items: "",
-                gold: auction.buyoutPrice,
+                gold: (auction.buyoutPrice - (auction.buyoutPrice * this.auctionConfig.deduction_fee)),
             }
         })
     }
