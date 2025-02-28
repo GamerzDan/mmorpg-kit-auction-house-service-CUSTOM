@@ -70,13 +70,28 @@ export class AuctionService {
         const query: any = request.query
         const limit = Number(query.limit ? query.limit : 20)
         const page = Number(query.page ? query.page : 1)
-        const list: any[] = await this.auctionClient.auction.findMany({
-            where: {
-                isEnd: false
-            },
-            skip: (page - 1) * limit,
-            take: limit,
-        })
+        const searchTerm = query.search
+
+        if(!searchTerm){
+            const list: any[] = await this.auctionClient.auction.findMany({
+                where: {
+                    isEnd: false
+                },
+                skip: (page - 1) * limit,
+                take: limit,
+            })
+        } else {
+            const list: any[] = await this.auctionClient.auction.findMany({
+                where: {
+                    isEnd: false,
+                    metaName: {
+                        contains: searchTerm,
+                    },
+                },
+                skip: (page - 1) * limit,
+                take: limit,
+            })
+        }
         const count = await this.auctionClient.auction.count({
             where: {
                 isEnd: false
