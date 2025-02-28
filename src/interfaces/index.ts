@@ -38,6 +38,7 @@ export interface AuctionOption {
 }
 
 export interface AuctionConfig {
+    deduction_fee: number,
     mail_sender_id: string,
     mail_sender_name: string,
     mail_bought_title: string,
