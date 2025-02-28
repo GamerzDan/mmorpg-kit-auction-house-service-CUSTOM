@@ -1,4 +1,5 @@
 {
+    "deduction_fee" : 0.1,
     "mail_sender_id": "System",
     "mail_sender_name": "Auction Manager",
     "mail_bought_title": "Items you bought from the auction house",
