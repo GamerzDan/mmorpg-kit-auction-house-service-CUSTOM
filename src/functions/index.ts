@@ -70,7 +70,7 @@ export class AuctionService {
         const query: any = request.query
         const limit = Number(query.limit ? query.limit : 20)
         const page = Number(query.page ? query.page : 1)
-        const searchTerm = query.search
+        const searchTerm = String(query.search ? query.search : "")
 
         if(!searchTerm){
             const list: any[] = await this.auctionClient.auction.findMany({
