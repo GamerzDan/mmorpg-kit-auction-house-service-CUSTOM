@@ -70,13 +70,14 @@ export class AuctionService {
         const query: any = request.query
         const limit = Number(query.limit ? query.limit : 20)
         const page = Number(query.page ? query.page : 1)
+        const isEnd = Bool(query.isend ? query.isend : false)
         let searchTerm = String(query.search ? query.search : "")
         var list: any[] = []
 
         if(searchTerm.length < 3){
             list = await this.auctionClient.auction.findMany({
                 where: {
-                    isEnd: false
+                    isEnd: isEnd
                 },
                 skip: (page - 1) * limit,
                 take: limit,
@@ -84,9 +85,10 @@ export class AuctionService {
         } else {
             list = await this.auctionClient.auction.findMany({
                 where: {
-                    isEnd: false,
+                    isEnd: isEnd,
                     metaName: {
                         contains: searchTerm,
+                        mode: "insensitive",
                     },
                 },
                 skip: (page - 1) * limit,
