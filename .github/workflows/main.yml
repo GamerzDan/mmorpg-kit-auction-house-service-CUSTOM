@@ -1,6 +1,7 @@
 name: mmorpg-kit-auction-house-service-main
 
 on:
+  workflow_dispatch: {}
   push:
     branches:
       - "main"
