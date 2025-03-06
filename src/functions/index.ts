@@ -70,6 +70,8 @@ export class AuctionService {
         const query: any = request.query
         const limit = Number(query.limit ? query.limit : 20)
         const page = Number(query.page ? query.page : 1)
+
+        //Custom
         const isEnd = Boolean(query.isend ? query.isend : false)
         let searchTerm = String(query.search ? query.search : "")
         var list: any[] = []
@@ -488,7 +490,10 @@ export class AuctionService {
         if (!auction) {
             return
         }
-        // Send item to buyer
+		
+		let sellerEarnings = auction.bidPrice; 
+		
+        // Send gold to seller after tax deduction
         await this.mailClient.mail.create({
             data: {
                 eventId: "",
@@ -513,7 +518,7 @@ export class AuctionService {
                 content: this.auctionConfig.mail_sold_content,
                 currencies: "",
                 items: "",
-                gold: (auction.buyoutPrice - (auction.buyoutPrice * this.auctionConfig.deduction_fee)),
+                gold: (sellerEarnings - (sellerEarnings * this.auctionConfig.deduction_fee)),
             }
         })
     }

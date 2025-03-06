@@ -1,5 +1,4 @@
 {
-    "deduction_fee" : 0.1,
     "mail_sender_id": "System",
     "mail_sender_name": "Auction Manager",
     "mail_bought_title": "Items you bought from the auction house",
@@ -13,15 +12,35 @@
     "auction_options": [
         {
             "hours": 12,
-            "price": 1
+            "price": 2000
         },
         {
             "hours": 24,
-            "price": 2
+            "price": 4000
         },
         {
             "hours": 48,
-            "price": 4
+            "price": 8000
+        },
+        {
+            "hours": 72,
+            "price": 16000
+        },
+        {
+            "hours": 96,
+            "price": 32000
+        },
+        {
+            "hours": 120,
+            "price": 64000
+        },
+        {
+            "hours": 144,
+            "price": 128000
+        },
+        {
+            "hours": 168,
+            "price": 256000
         }
     ]
 }

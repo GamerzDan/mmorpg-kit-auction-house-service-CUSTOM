@@ -6,7 +6,7 @@ Auction house service for MMORPG KIT
 
 ## Install
 - Clone this repo
-- `npm i --force`
+- `npm i`
 
 ## Generate Prisma Clients
 - `npx prisma generate --schema "./prisma/auctionSchema.prisma"`
