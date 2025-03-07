@@ -75,6 +75,7 @@ export class AuctionService {
         const isEnd = Boolean(query.isend ? query.isend : false)
         let searchTerm = String(query.search ? query.search : "")
         var list: any[] = []
+	var count = 1
 
         if(searchTerm.length < 3){
             list = await this.auctionClient.auction.findMany({
@@ -84,6 +85,11 @@ export class AuctionService {
                 skip: (page - 1) * limit,
                 take: limit,
             })
+	count = await this.auctionClient.auction.count({
+		where: {
+			isEnd: isEnd
+		}
+	})
         } else {
             list = await this.auctionClient.auction.findMany({
                 where: {
@@ -95,12 +101,16 @@ export class AuctionService {
                 skip: (page - 1) * limit,
                 take: limit,
             })
-        }
-        const count = await this.auctionClient.auction.count({
-            where: {
-                isEnd: false
-            }
-        })
+	count = await this.auctionClient.auction.count({
+	    where: {
+		isEnd: isEnd,
+		    metaName: {
+			contains: searchTerm,
+		    },
+	    }
+	})
+      }
+         
         for (let i = 0; i < list.length; ++i) {
             list[i].timeLeft = this.findTimeLeft(DateTime.fromJSDate(list[i].endedAt).toLocal())
         }
